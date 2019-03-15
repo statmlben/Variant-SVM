@@ -1,1 +1,1 @@
-__all__ = ['VarSVM']
+__all__ = ['DriftSVM', 'NoNeg_DriftSVM']
