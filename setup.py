@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     # Needed to silence warnings (and to be a worthwhile package)
     name='VarSVM',
-    url='https://github.com/statmlben',
+    url='https://github.com/statmlben/VarSVM',
     author='Ben Dai',
     author_email='bdai@umn.edu',
     # Needed to actually package something
