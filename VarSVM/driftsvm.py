@@ -19,6 +19,7 @@ class driftsvm(object):
 		diff = 1.
 		sample_weight = self.C*np.array(sample_weight)
 		sample_weight = sample_weight * np.ones(n)
+		drift = y * drift
 		## compute Xy matrix
 		if sparse.issparse(X):
 			Xy = sparse.csr_matrix(X.multiply(y.reshape(-1, 1)))

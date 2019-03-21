@@ -18,6 +18,7 @@ class noneg_driftsvm(object):
 		n, d = X.shape
 		self.alpha, self.rho = np.zeros(n), np.zeros(d)
 		diff = 1.
+		drift = drift * y
 		sample_weight = self.C*np.array(sample_weight)
 		sample_weight = sample_weight * np.ones(n)
 		## compute Xy matrix
