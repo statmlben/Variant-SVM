@@ -38,8 +38,14 @@ class driftsvm(object):
 				break
 			beta_old = np.copy(self.beta)
 			for i in range(n):
-				delta_tmp = (1. - drift[i] - np.dot(self.beta, Xy[i])) / diag[i]
-				delta_tmp = max(-self.alpha[i], min(sample_weight[i] - self.alpha[i], delta_tmp))
+				if diag[i] != 0:
+					delta_tmp = (1. - drift[i] - np.dot(self.beta, Xy[i])) / diag[i]
+					delta_tmp = max(-self.alpha[i], min(sample_weight[i] - self.alpha[i], delta_tmp))
+				if diag[i] == 0:
+					if np.dot(self.beta, Xy[i]) < 1 - drift[i]:
+						delta_tmp = sample_weight[i] - self.alpha[i]
+					else:
+						delta_tmp = -self.alpha[i]
 				self.alpha[i] = self.alpha[i] + delta_tmp
 				self.beta = self.beta + delta_tmp*Xy[i]
 			obj = self.dual_obj(Xy=Xy, drift=drift)
