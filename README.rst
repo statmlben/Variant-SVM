@@ -103,8 +103,23 @@ SVM with non-negative constrains for coefficients.
 			- drift: array-like, shape (n_samples,), drift or fixed intercept for each instance, see `doc <./Variant-SVMs.pdf>`_.
 			- sample_weight : array-like, shape (n_samples,), weight for each instance.
 
+Example
+~~~~~~~~~~~~~~~~~
+```ruby
+import numpy as np
+from sklearn.datasets import make_classification
+from VarSVM import noneg_driftsvm
 
+X, y = make_classification(n_features=4, random_state=0)
+y = y * 2 - 1
 
+n = len(X)
+drift = .28*np.ones(n)
+
+clf = noneg_driftsvm()
+clf.fit(X=X, y=y, drift=drift)
+y_pred = clf.decision_function(X=X, drift=drift)
+```
 
 
 
