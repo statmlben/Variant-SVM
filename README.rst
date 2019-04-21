@@ -106,24 +106,18 @@ SVM with non-negative constrains for coefficients.
 Example
 ~~~~~~~~~~~~~~~~~
 
-```python
-import numpy as np
-from sklearn.datasets import make_classification
-from VarSVM import noneg_driftsvm
+.. code-block:: python
+	import numpy as np
+	from sklearn.datasets import make_classification
+	from VarSVM import noneg_driftsvm
 
-X, y = make_classification(n_features=4, random_state=0)
-y = y * 2 - 1
+	X, y = make_classification(n_features=4, random_state=0)
+	y = y * 2 - 1
 
-n = len(X)
-drift = .28*np.ones(n)
+	n = len(X)
+	drift = .28*np.ones(n)
 
-clf = noneg_driftsvm()
-clf.fit(X=X, y=y, drift=drift)
-y_pred = clf.decision_function(X=X, drift=drift)
-```
-
-
-
-
-
+	clf = noneg_driftsvm()
+	clf.fit(X=X, y=y, drift=drift)
+	y_pred = clf.decision_function(X=X, drift=drift)
 
