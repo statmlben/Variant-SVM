@@ -1,6 +1,6 @@
 import numpy as np
 from scipy import sparse
-from fastloop import CD
+from VarSVM import CD
 
 class weightsvm(object):
 	## the function use coordinate descent to update the drift linear SVM
