@@ -28,6 +28,8 @@ if __name__ == "__main__":
         # The license can be anything you like
         license='MIT',
         description='A python package for variant SVMs',
+        cmdclass={"build_ext": build_ext},
+        ext_modules=EXTENSIONS
         # We will also need a readme eventually (there will be a warning)
         # long_description=open('README.txt').read(),
     )
