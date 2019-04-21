@@ -1,8 +1,8 @@
 import numpy as np
 from scipy import sparse
-from fastloop import CD_drift
+from fastloop import CD
 
-class driftsvm(object):
+class weightsvm(object):
 	## the function use coordinate descent to update the drift linear SVM
 	## C \sum_{i=1}^n w_i V(y_i(\beta^T x_i + drift_i)) + 1/2 \beta^T \beta
 	def __init__(self, C=1., print_step=1, eps=1e-4):
@@ -14,13 +14,12 @@ class driftsvm(object):
 		self.eps = eps
 		self.print_step = print_step
 
-	def fit(self, X, y, drift, sample_weight=1.):
+	def fit(self, X, y, sample_weight=1.):
 		n, d = X.shape
 		self.alpha = np.zeros(n)
 		diff = 1.
 		sample_weight = self.C*np.array(sample_weight)
 		sample_weight = sample_weight * np.ones(n)
-		drift = y * drift
 		## compute Xy matrix
 		if sparse.issparse(X):
 			Xy = sparse.csr_matrix(X.multiply(y.reshape(-1, 1)))
@@ -34,7 +33,7 @@ class driftsvm(object):
 
 		self.beta = np.dot(self.alpha, Xy)
 		# coordinate descent
-		alpha_C, beta_C = CD_drift(Xy, diag, drift, self.alpha, self.beta, sample_weight, self.max_iter, self.eps, self.print_step)
+		alpha_C, beta_C = CD(Xy, diag, self.alpha, self.beta, sample_weight, self.max_iter, self.eps, self.print_step)
 		self.alpha, self.beta = np.array(alpha_C), np.array(beta_C)
 		# for ite in range(self.max_iter):
 		# 	if diff < self.eps:

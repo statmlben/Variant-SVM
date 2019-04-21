@@ -1,10 +1,11 @@
 import numpy as np
 from scipy import sparse
+from fastloop import noneg_CD_drift
 
 class noneg_driftsvm(object):
 	## the function use coordinate descent to update the drift linear SVM
 	## C \sum_{i=1}^n w_i V(y_i(\beta^T x_i + drift_i)) + 1/2 \beta^T \beta
-	def __init__(self, C=1., print_step=True, eps=1e-4):
+	def __init__(self, C=1., print_step=1, eps=1e-4):
 		self.loss = 'hinge'
 		self.alpha = []
 		self.beta = []
@@ -34,37 +35,34 @@ class noneg_driftsvm(object):
 
 		self.beta = np.dot(self.alpha, Xy) + self.rho
 		# coordinate descent
-		for ite in range(self.max_iter):
-			if diff < self.eps:
-				break
-			beta_old = np.copy(self.beta)
-			for i in range(n):
-				if diag[i] != 0:
-					delta_tmp = (1. - drift[i] - np.dot(self.beta, Xy[i])) / diag[i]
-					delta_tmp = max(-self.alpha[i], min(sample_weight[i] - self.alpha[i], delta_tmp))
-				if diag[i] == 0:
-					if np.dot(self.beta, Xy[i]) < 1 - drift[i]:
-						delta_tmp = sample_weight[i] - self.alpha[i]
-					else:
-						delta_tmp = -self.alpha[i]
-				self.alpha[i] = self.alpha[i] + delta_tmp
-				self.beta = self.beta + delta_tmp*Xy[i]
-			for j in range(d):
-				delta_tmp = max(-self.rho[j], -self.beta[j])
-				self.rho[j] = self.rho[j] + delta_tmp
-				self.beta[j] = self.beta[j] + delta_tmp
-			obj = self.dual_obj(Xy=Xy, drift=drift)
-			# obj = self.prime_obj(X=X, y=y, drift=drift)
-			diff = np.sum(np.abs(beta_old - self.beta))/np.sum(np.abs(beta_old+1e-10))
-			if self.print_step:
-				if ite > 0:
-					print("ite %s coordinate descent with diff: %.3f; obj: %.3f" %(ite, diff, obj))
-	
-	# def prime_obj(self, X, y, drift):
-	# 	n, d = X.shape
-	# 	score = self.decision_function(X=X, drift=drift)
-	# 	obj = n*hinge_loss(y, score) + .5 * np.dot(self.beta, self.beta)
-	# 	return obj
+		alpha_C, beta_C, rho_C = noneg_CD_drift(Xy, diag, drift, self.alpha, self.beta, self.rho, 
+												sample_weight, self.max_iter, self.eps, self.print_step)
+		self.alpha, self.beta, self.rho = np.array(alpha_C), np.array(beta_C), np.array(rho_C)
+		# for ite in range(self.max_iter):
+		# 	if diff < self.eps:
+		# 		break
+		# 	beta_old = np.copy(self.beta)
+		# 	for i in range(n):
+		# 		if diag[i] != 0:
+		# 			delta_tmp = (1. - drift[i] - np.dot(self.beta, Xy[i])) / diag[i]
+		# 			delta_tmp = max(-self.alpha[i], min(sample_weight[i] - self.alpha[i], delta_tmp))
+		# 		if diag[i] == 0:
+		# 			if np.dot(self.beta, Xy[i]) < 1 - drift[i]:
+		# 				delta_tmp = sample_weight[i] - self.alpha[i]
+		# 			else:
+		# 				delta_tmp = -self.alpha[i]
+		# 		self.alpha[i] = self.alpha[i] + delta_tmp
+		# 		self.beta = self.beta + delta_tmp*Xy[i]
+		# 	for j in range(d):
+		# 		delta_tmp = max(-self.rho[j], -self.beta[j])
+		# 		self.rho[j] = self.rho[j] + delta_tmp
+		# 		self.beta[j] = self.beta[j] + delta_tmp
+		# 	obj = self.dual_obj(Xy=Xy, drift=drift)
+		# 	# obj = self.prime_obj(X=X, y=y, drift=drift)
+		# 	diff = np.sum(np.abs(beta_old - self.beta))/np.sum(np.abs(beta_old+1e-10))
+		# 	if self.print_step:
+		# 		if ite > 0:
+		# 			print("ite %s coordinate descent with diff: %.3f; obj: %.3f" %(ite, diff, obj))
 
 	def dual_obj(self, Xy, drift):
 		sum_tmp = np.dot(self.alpha, Xy)
