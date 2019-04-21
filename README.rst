@@ -13,9 +13,10 @@ Dependencies
 
 Variant-SVMs requires:
 
-- Python (>= 3.5)
-- NumPy (>= 1.11.0)
-- SciPy (>= 0.17.0)
+- Python
+- NumPy
+- SciPy
+- Cython 
 
 
 User installation
