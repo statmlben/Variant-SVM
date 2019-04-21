@@ -41,4 +41,17 @@ The mathematical formulation for each model can be found in `VariantSVMs <./Vari
 Weighted SVM
 ~~~~~~~~~~~~
 
-- class weightsvm(object):
+- class VarSVM.weightsvm(alpha=[], beta=[], C=1., max_iter = 1000, eps = 1e-4, print_step = 1)
+	- **alpha**: Dual variable.
+	- **beta**: Primal variable, or coefficients of the support vector in the decision function.
+	- **C**: Penalty parameter C of the error term.
+	- **max_iter**: Hard limit on iterations for coordinate descent.
+	- **eps**: Tolerance for stopping criterion based on the relative l1 norm for difference of beta and beta_old.
+	- **print_step**: If print the interations for coordinate descent, 1 indicates YES, 0 indicates NO.
+
+
+
+
+
+
+
