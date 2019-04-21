@@ -40,6 +40,7 @@ The mathematical formulation for each model can be found in `VariantSVMs <./Vari
 
 Weighted SVM
 ~~~~~~~~~~~~
+Classical weighted SVMs.
 
 - class VarSVM.weightsvm(alpha=[], beta=[], C=1., max_iter = 1000, eps = 1e-4, print_step = 1)
 	- Parameters:
@@ -57,6 +58,48 @@ Weighted SVM
 			- y : array-like, shape (n_samples,) **NOTE: y must be +1 or -1!**
 			- sample_weight : array-like, shape (n_samples,), weight for each sample.
 
+Drift SVM
+~~~~~~~~~~~~
+SVM with dift or fixed intercept for each instance.
+
+- class VarSVM.driftsvm(alpha=[], beta=[], C=1., max_iter = 1000, eps = 1e-4, print_step = 1)
+	- Parameters:
+		- **alpha**: Dual variable.
+		- **beta**: Primal variable, or coefficients of the support vector in the decision function.
+		- **C**: Penalty parameter C of the error term.
+		- **max_iter**: Hard limit on iterations for coordinate descent.
+		- **eps**: Tolerance for stopping criterion based on the relative l1 norm for difference of beta and beta_old.
+		- **print_step**: If print the interations for coordinate descent, 1 indicates YES, 0 indicates NO.
+	- Methods:
+		- **decision_function(X)**: Evaluates the decision function for the samples in X.
+			- X : array-like, shape (n_samples, n_features)
+		- **fit(X, y, drift, sample_weight=1.)**: Fit the SVM model.
+			- X : {array-like, sparse matrix}, shape (n_samples, n_features)
+			- y : array-like, shape (n_samples,). **NOTE: y must be +1 or -1!**
+			- drift: array-like, shape (n_samples,), drift or fixed intercept for each instance, see `doc <./Variant-SVMs.pdf>`_.
+			- sample_weight : array-like, shape (n_samples,), weight for each instance.
+
+Non-negative Drift SVM
+~~~~~~~~~~~~
+SVM with non-negative constrains for coefficients.
+
+- class VarSVM.noneg_driftsvm(alpha=[], beta=[], C=1., max_iter = 1000, eps = 1e-4, print_step = 1)
+
+	- Parameters:
+		- **alpha**: Dual variable.
+		- **beta**: Primal variable, or coefficients of the support vector in the decision function.
+		- **C**: Penalty parameter C of the error term.
+		- **max_iter**: Hard limit on iterations for coordinate descent.
+		- **eps**: Tolerance for stopping criterion based on the relative l1 norm for difference of beta and beta_old.
+		- **print_step**: If print the interations for coordinate descent, 1 indicates YES, 0 indicates NO.
+	- Methods:
+		- **decision_function(X)**: Evaluates the decision function for the samples in X.
+			- X : array-like, shape (n_samples, n_features)
+		- **fit(X, y, drift, sample_weight=1.)**: Fit the SVM model.
+			- X : {array-like, sparse matrix}, shape (n_samples, n_features)
+			- y : array-like, shape (n_samples,). **NOTE: y must be +1 or -1!**
+			- drift: array-like, shape (n_samples,), drift or fixed intercept for each instance, see `doc <./Variant-SVMs.pdf>`_.
+			- sample_weight : array-like, shape (n_samples,), weight for each instance.
 
 
 
