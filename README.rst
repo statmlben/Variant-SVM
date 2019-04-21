@@ -106,7 +106,7 @@ SVM with non-negative constrains for coefficients.
 Example
 ~~~~~~~~~~~~~~~~~
 
-.. code-block:: bash
+.. code-block:: Python
 
    import numpy as np
    from sklearn.datasets import make_classification
