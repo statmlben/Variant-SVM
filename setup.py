@@ -16,7 +16,7 @@ if __name__ == "__main__":
     setup(
         # Needed to silence warnings (and to be a worthwhile package)
         name='VarSVM',
-        url='https://github.com/statmlben/VarSVM',
+        url='https://github.com/statmlben/Variant-SVM',
         author='Ben Dai',
         author_email='bdai@umn.edu',
         # Needed to actually package something
