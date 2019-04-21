@@ -43,6 +43,7 @@ Weighted SVM
 Classical weighted SVMs.
 
 - class VarSVM.weightsvm(alpha=[], beta=[], C=1., max_iter = 1000, eps = 1e-4, print_step = 1)
+
 	- Parameters:
 		- **alpha**: Dual variable.
 		- **beta**: Primal variable, or coefficients of the support vector in the decision function.
@@ -63,6 +64,7 @@ Drift SVM
 SVM with dift or fixed intercept for each instance.
 
 - class VarSVM.driftsvm(alpha=[], beta=[], C=1., max_iter = 1000, eps = 1e-4, print_step = 1)
+
 	- Parameters:
 		- **alpha**: Dual variable.
 		- **beta**: Primal variable, or coefficients of the support vector in the decision function.
