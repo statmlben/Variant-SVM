@@ -56,10 +56,10 @@ class weightsvm(object):
 		# 		if ite > 0:
 		# 			print("ite %s coordinate descent with diff: %.3f; obj: %.3f" %(ite, diff, obj))
 
-	def dual_obj(self, Xy, drift):
+	def dual_obj(self, Xy):
                 ## compute the dual objective function
 		sum_tmp = np.dot(self.alpha, Xy)
-		return np.dot(1. - drift, self.alpha) - .5 * np.dot(sum_tmp, sum_tmp)
+		return np.dot(1., self.alpha) - .5 * np.dot(sum_tmp, sum_tmp)
 
-	def decision_function(self, X, drift):
-		return np.dot(X, self.beta) + drift
+	def decision_function(self, X):
+		return np.dot(X, self.beta)
