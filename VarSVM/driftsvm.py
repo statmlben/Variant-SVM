@@ -1,6 +1,6 @@
 import numpy as np
 from scipy import sparse
-from VarSVM.fastloop import CD_drift
+from fastloop import CD_drift
 
 class driftsvm(object):
 	## the function use coordinate descent to update the drift linear SVM
