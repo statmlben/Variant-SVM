@@ -107,17 +107,20 @@ Example
 ~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
-	import numpy as np
-	from sklearn.datasets import make_classification
-	from VarSVM import noneg_driftsvm
+   :caption: this.py
+   :name: this-py
 
-	X, y = make_classification(n_features=4, random_state=0)
-	y = y * 2 - 1
+   import numpy as np
+   from sklearn.datasets import make_classification
+   from VarSVM import noneg_driftsvm
 
-	n = len(X)
-	drift = .28*np.ones(n)
+   X, y = make_classification(n_features=4, random_state=0)
+   y = y * 2 - 1
 
-	clf = noneg_driftsvm()
-	clf.fit(X=X, y=y, drift=drift)
-	y_pred = clf.decision_function(X=X, drift=drift)
+   n = len(X)
+   drift = .28*np.ones(n)
+
+   clf = noneg_driftsvm()
+   clf.fit(X=X, y=y, drift=drift)
+   y_pred = clf.decision_function(X=X, drift=drift)
 
