@@ -3,4 +3,4 @@ from VarSVM import weightsvm
 from VarSVM import driftsvm
 from VarSVM import noneg_driftsvm
 
-# __all__ = ['fastloop', 'weightsvm', 'driftsvm', 'noneg_driftsvm']
+__all__ = ['weightsvm', 'driftsvm', 'noneg_driftsvm']
