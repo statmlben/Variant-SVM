@@ -123,12 +123,6 @@ y_pred = clf.decision_function(X=X, drift=drift)
 ```
 
 
-```javascript
-if (isAwesome){
-  return true
-}
-```
-
 
 
 
