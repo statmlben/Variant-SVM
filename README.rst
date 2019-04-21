@@ -105,7 +105,7 @@ SVM with non-negative constrains for coefficients.
 
 Example
 ~~~~~~~~~~~~~~~~~
-```ruby
+```python
 import numpy as np
 from sklearn.datasets import make_classification
 from VarSVM import noneg_driftsvm
