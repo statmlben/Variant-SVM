@@ -1,81 +1,31 @@
 import numpy as np
 from libc.stdio cimport printf
-
-cdef extern from 'cblas.h':
-	ctypedef enum CBLAS_ORDER:
-		CblasRowMajor
-		CblasColMajor
-	ctypedef enum CBLAS_TRANSPOSE:
-		CblasNoTrans
-		CblasTrans
-		CblasConjTrans
-	void dgemv 'cblas_dgemv'(CBLAS_ORDER order,
-							CBLAS_TRANSPOSE transpose,
-							int M, int N,
-							double alpha, double* A, int lda,
-							double* X, int incX,
-							double beta, double* Y, int incY) nogil
-
-cdef extern from 'cblas.h':
-	double ddot 'cblas_ddot'(int N, double* X, int incX, double* Y, int incY) nogil
-	void dscal 'cblas_dscal'(int N, double alpha, double* X, int incX) nogil
-	void daxpy 'cblas_daxpy'(int N, double a, double* X, int incX, double* Y, int incY) nogil
-	double dasum 'cblas_dasum'(int N, double* X, int incX) nogil
-	void dcopy 'cblas_dcopy' (int N, double* X, int incX, double* Y, int incY) nogil
+cimport scipy.linalg.cython_blas as blas
 
 cpdef run_scopy(double[:] x, double[:] y, int dim):
-	cdef double* x_ptr = &x[0]
-	cdef double* y_ptr = &y[0]
-	dcopy(dim, x_ptr, 1, y_ptr, 1)
+	cdef int inc = 1
+	blas.dcopy(&dim, &x[0], &inc, &y[0], &inc)
 
 cpdef run_daxpy(double a, double[:] x, double[:] y, int dim):
-	cdef double* x_ptr = &x[0]
-	cdef double* y_ptr = &y[0]
-	daxpy(dim, a, x_ptr, 1, y_ptr, 1)
+	cdef int inc = 1
+	blas.daxpy(&dim, &a, &x[0], &inc, &y[0], &inc)
 
 cpdef double[:] run_vec_minus(double[:] x, double[:] y, int dim):
 	cdef double[:] tmp = np.zeros(dim)
-	cdef double* x_ptr = &x[0]
-	cdef double* y_ptr = &y[0]
-	cdef double* tmp_ptr = &tmp[0]
-	daxpy(dim, 1, x_ptr, 1, tmp_ptr, 1)
-	daxpy(dim, -1, y_ptr, 1, tmp_ptr, 1)
+	cdef int inc = 1
+	cdef double pos = 1
+	cdef double neg = -1
+	blas.daxpy(&dim, &pos, &x[0], &inc, &tmp[0], &inc)
+	blas.daxpy(&dim, &neg, &y[0], &inc, &tmp[0], &inc)
 	return tmp
 
 cpdef double l1_norm(double[:] x, int dim):
-	cdef double* x_ptr = &x[0]
-	return dasum(dim, x_ptr, 1)
+	cdef int inc = 1
+	return blas.dasum(&dim, &x[0], &inc)
 
 cpdef double run_blas_dot(double[:] x, double[:] y, int dim):
-
-	# Get the pointers.
-	cdef double* x_ptr = &x[0]
-	cdef double* y_ptr = &y[0]
-
-	return ddot(dim, x_ptr, 1, y_ptr, 1)
-
-cpdef run_blas_dgemv(double[:,:] A,
-					 double[:] x,
-					 double[:] y,
-					 int M,
-					 int N):
-
-	cdef double* A_ptr = &A[0,0]
-	cdef double* x_ptr = &x[0]
-	cdef double* y_ptr = &y[0]
-
-	dgemv(CblasRowMajor,
-		  CblasNoTrans,
-		  M,
-		  N,
-		  1,
-		  A_ptr,
-		  N,
-		  x_ptr,
-		  1,
-		  1,
-		  y_ptr,
-		  1)
+	cdef int inc = 1
+	return blas.ddot(&dim, &x[0], &inc, &y[0], &inc)
 
 def CD(double[:,:] Xy, double[:] diag, double[:] alpha, double[:] beta, double[:] sample_weight, int max_iter, double eps, int print_step):
 	cdef int n = Xy.shape[0]
