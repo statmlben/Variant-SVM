@@ -2,6 +2,7 @@ import numpy as np
 cimport cython
 from libc.stdio cimport printf
 cimport scipy.linalg.cython_blas as blas
+
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.nonecheck(False)

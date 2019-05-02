@@ -34,8 +34,30 @@ class driftsvm(object):
 
 		self.beta = np.dot(self.alpha, Xy)
 		# coordinate descent
-		alpha_C, beta_C = CD_drift(Xy, diag, drift, self.alpha, self.beta, sample_weight, self.max_iter, self.eps, self.print_step)
-		self.alpha, self.beta = np.array(alpha_C), np.array(beta_C)
+		if sparse.issparse(Xy):
+			for ite in range(self.max_iter):
+				if diff < self.eps:
+					break
+				beta_old = np.copy(self.beta)
+				for i in range(n):
+					if diag[i] != 0:
+						delta_tmp = (1. - drift[i] - Xy[i].dot(self.beta)) / diag[i]
+						delta_tmp = max(-self.alpha[i], min(sample_weight[i] - self.alpha[i], delta_tmp))
+					if diag[i] == 0:
+						if Xy[i].dot(self.beta) < 1 - drift[i]:
+							delta_tmp = sample_weight[i] - self.alpha[i]
+						else:
+							delta_tmp = -self.alpha[i]
+					self.alpha[i] = self.alpha[i] + delta_tmp
+					self.beta = np.array(self.beta + delta_tmp*Xy[i])[0]
+				diff = np.sum(np.abs(beta_old - self.beta))/np.sum(np.abs(beta_old+1e-10))
+				if self.print_step == 1:
+					if ite > 0:
+						print("ite %s coordinate descent with diff: %.3f;" %(ite, diff))
+		else:
+			alpha_C, beta_C = CD_drift(Xy, diag, drift, self.alpha, self.beta, sample_weight, self.max_iter, self.eps, self.print_step)
+			self.alpha, self.beta = np.array(alpha_C), np.array(beta_C)
+		
 		# for ite in range(self.max_iter):
 		# 	if diff < self.eps:
 		# 		break
