@@ -27,7 +27,7 @@ class weightsvm(object):
 			Xy = X * y[:, np.newaxis]
 		## compute diag vector
 		if sparse.issparse(X):
-			diag = np.array([Xy[i].dot(Xy[i]) for i in range(n)])
+			diag = np.array([Xy[i].dot(Xy[i].T).toarray()[0][0] for i in range(n)])
 		else:
 			diag = np.array([Xy[i].dot(Xy[i]) for i in range(n)])
 
