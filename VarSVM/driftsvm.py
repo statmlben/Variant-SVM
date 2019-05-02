@@ -41,10 +41,10 @@ class driftsvm(object):
 				beta_old = np.copy(self.beta)
 				for i in range(n):
 					if diag[i] != 0:
-						delta_tmp = (1. - drift[i] - Xy[i].dot(self.beta)) / diag[i]
+						delta_tmp = (1. - drift[i] - Xy[i].dot(self.beta)[0]) / diag[i]
 						delta_tmp = max(-self.alpha[i], min(sample_weight[i] - self.alpha[i], delta_tmp))
 					if diag[i] == 0:
-						if Xy[i].dot(self.beta) < 1 - drift[i]:
+						if Xy[i].dot(self.beta)[0] < 1 - drift[i]:
 							delta_tmp = sample_weight[i] - self.alpha[i]
 						else:
 							delta_tmp = -self.alpha[i]
