@@ -58,6 +58,43 @@ class driftsvm(object):
 			alpha_C, beta_C = CD_drift(Xy, diag, drift, self.alpha, self.beta, sample_weight, self.max_iter, self.eps, self.print_step)
 			self.alpha, self.beta = np.array(alpha_C), np.array(beta_C)
 		
+		if self.loss == 'psi':
+			diff = 1. 
+			for ite in range(self.max_iter):
+				if diff < eps:
+					break
+				beta_old = np.copy(self.beta)
+				G = 1.*(np.dot(Xy, self.beta) < 0)
+				self.beta = Xy.T.dot(self.alpha - G)
+				# psi_drift = np.dot(Xy, np.sum(Xy * G[:, np.newaxis], axis=0))
+				# B = np.dot(G, Xy)
+				# drift_new = drift - psi_drift + np.dot(Xy, B)
+				if sparse.issparse(Xy):
+					for ite in range(self.max_iter):
+						if diff < self.eps:
+							break
+						beta_old = np.copy(self.beta)
+						for i in range(n):
+							if diag[i] != 0:
+								delta_tmp = (1. - drift[i] - Xy[i].dot(self.beta)[0]) / diag[i]
+								delta_tmp = max(-self.alpha[i], min(sample_weight[i] - self.alpha[i], delta_tmp))
+							if diag[i] == 0:
+								if Xy[i].dot(self.beta)[0] < 1 - drift[i]:
+									delta_tmp = sample_weight[i] - self.alpha[i]
+								else:
+									delta_tmp = -self.alpha[i]
+							self.alpha[i] = self.alpha[i] + delta_tmp
+							self.beta = np.array(self.beta + delta_tmp*Xy[i])[0]
+						diff = np.sum(np.abs(beta_old - self.beta))/np.sum(np.abs(beta_old+1e-10))
+						if self.print_step == 1:
+							if ite > 0:
+								print("ite %s coordinate descent with diff: %.3f;" %(ite, diff))
+				else:
+					alpha_C, beta_C = CD_drift(Xy, diag, drift, self.alpha, self.beta, sample_weight, self.max_iter, self.eps, self.print_step)
+					self.alpha, self.beta = np.array(alpha_C), np.array(beta_C)
+				diff = np.sum(np.abs(self.beta - beta_old)) / np.sum(np.abs(beta_old))
+				# obj_psi = np.sum(np.minimum(np.maximum(1 - self.decision_function(X,drift)*y, 0),1)) + .5*self.beta.dot(self.beta)
+				# print(obj_psi)
 		# for ite in range(self.max_iter):
 		# 	if diff < self.eps:
 		# 		break
@@ -80,7 +117,7 @@ class driftsvm(object):
 		# 			print("ite %s coordinate descent with diff: %.3f; obj: %.3f" %(ite, diff, obj))
 
 	def dual_obj(self, Xy, drift):
-                ## compute the dual objective function
+		## compute the dual objective function
 		sum_tmp = np.dot(self.alpha, Xy)
 		return np.dot(1. - drift, self.alpha) - .5 * np.dot(sum_tmp, sum_tmp)
 
