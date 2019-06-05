@@ -61,7 +61,7 @@ class driftsvm(object):
 		if self.loss == 'psi':
 			diff_dca = 1. 
 			for ite_dca in range(self.max_iter):
-				if diff_dca < eps:
+				if diff_dca < self.eps:
 					break
 				beta_old = np.copy(self.beta)
 				G = 1.*(np.dot(Xy, self.beta) < 0)
