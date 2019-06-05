@@ -5,8 +5,8 @@ from VarSVM import CD_drift
 class driftsvm(object):
 	## the function use coordinate descent to update the drift linear SVM
 	## C \sum_{i=1}^n w_i V(y_i(\beta^T x_i + drift_i)) + 1/2 \beta^T \beta
-	def __init__(self, C=1., print_step=1, eps=1e-4):
-		self.loss = 'hinge'
+	def __init__(self, C=1., loss='hinge', print_step=1, eps=1e-4):
+		self.loss = loss
 		self.alpha = []
 		self.beta = []
 		self.C = C
@@ -59,13 +59,14 @@ class driftsvm(object):
 			self.alpha, self.beta = np.array(alpha_C), np.array(beta_C)
 		
 		if self.loss == 'psi':
-			diff = 1. 
-			for ite in range(self.max_iter):
-				if diff < eps:
+			diff_dca = 1. 
+			for ite_dca in range(self.max_iter):
+				if diff_dca < eps:
 					break
 				beta_old = np.copy(self.beta)
 				G = 1.*(np.dot(Xy, self.beta) < 0)
 				self.beta = Xy.T.dot(self.alpha - G)
+				diff = 1.
 				# psi_drift = np.dot(Xy, np.sum(Xy * G[:, np.newaxis], axis=0))
 				# B = np.dot(G, Xy)
 				# drift_new = drift - psi_drift + np.dot(Xy, B)
@@ -92,7 +93,7 @@ class driftsvm(object):
 				else:
 					alpha_C, beta_C = CD_drift(Xy, diag, drift, self.alpha, self.beta, sample_weight, self.max_iter, self.eps, self.print_step)
 					self.alpha, self.beta = np.array(alpha_C), np.array(beta_C)
-				diff = np.sum(np.abs(self.beta - beta_old)) / np.sum(np.abs(beta_old))
+				diff_dca = np.sum(np.abs(self.beta - beta_old)) / np.sum(np.abs(beta_old))
 				print("DCA fits psi-loss with diff: %.3f" %diff)
 				# obj_psi = np.sum(np.minimum(np.maximum(1 - self.decision_function(X,drift)*y, 0),1)) + .5*self.beta.dot(self.beta)
 				# print(obj_psi)
