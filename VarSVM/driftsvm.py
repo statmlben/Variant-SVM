@@ -11,6 +11,7 @@ class driftsvm(object):
 		self.beta = []
 		self.C = C
 		self.max_iter = 1000
+		self.max_iter_dca = 1000
 		self.eps = eps
 		self.print_step = print_step
 
@@ -60,7 +61,7 @@ class driftsvm(object):
 		
 		if self.loss == 'psi':
 			diff_dca = 1. 
-			for ite_dca in range(self.max_iter):
+			for ite_dca in range(self.max_iter_dca):
 				if diff_dca < self.eps:
 					break
 				beta_old = np.copy(self.beta)
@@ -95,7 +96,8 @@ class driftsvm(object):
 					self.alpha, self.beta = np.array(alpha_C), np.array(beta_C)
 				diff_dca = np.sum(np.abs(self.beta - beta_old)) / (np.sum(np.abs(beta_old))+1e-10)
 				obj_psi = np.sum(np.minimum(np.maximum(1 - self.decision_function(X,drift)*y, 0),1)) + .5*self.beta.dot(self.beta)
-				print("DCA fits psi-loss with diff: %.3f; primal obj: %.3f" %(diff_dca, obj_psi))
+				if self.print_step == 1:
+					print("DCA fits psi-loss with diff: %.3f; primal obj: %.3f" %(diff_dca, obj_psi))
 
 		# for ite in range(self.max_iter):
 		# 	if diff < self.eps:
