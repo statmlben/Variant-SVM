@@ -64,7 +64,7 @@ class driftsvm(object):
 				if diff_dca < self.eps:
 					break
 				beta_old = np.copy(self.beta)
-				G = 1.*(Xy.dot(self.beta) < 0)
+				G = 1.*( (Xy.dot(self.beta) + drift) < 0)
 				self.beta = Xy.T.dot(self.alpha - G)
 				# psi_drift = np.dot(Xy, np.sum(Xy * G[:, np.newaxis], axis=0))
 				# B = np.dot(G, Xy)
