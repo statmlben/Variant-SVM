@@ -66,11 +66,11 @@ class driftsvm(object):
 				beta_old = np.copy(self.beta)
 				G = 1.*(np.dot(Xy, self.beta) < 0)
 				self.beta = Xy.T.dot(self.alpha - G)
-				diff = 1.
 				# psi_drift = np.dot(Xy, np.sum(Xy * G[:, np.newaxis], axis=0))
 				# B = np.dot(G, Xy)
 				# drift_new = drift - psi_drift + np.dot(Xy, B)
 				if sparse.issparse(Xy):
+					diff = 1.
 					for ite in range(self.max_iter):
 						if diff < self.eps:
 							break
@@ -94,7 +94,7 @@ class driftsvm(object):
 					alpha_C, beta_C = CD_drift(Xy, diag, drift, self.alpha, self.beta, sample_weight, self.max_iter, self.eps, self.print_step)
 					self.alpha, self.beta = np.array(alpha_C), np.array(beta_C)
 				diff_dca = np.sum(np.abs(self.beta - beta_old)) / np.sum(np.abs(beta_old))
-				print("DCA fits psi-loss with diff: %.3f" %diff)
+				print("DCA fits psi-loss with diff: %.3f" %diff_dca)
 				# obj_psi = np.sum(np.minimum(np.maximum(1 - self.decision_function(X,drift)*y, 0),1)) + .5*self.beta.dot(self.beta)
 				# print(obj_psi)
 		# for ite in range(self.max_iter):
