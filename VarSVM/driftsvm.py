@@ -37,7 +37,7 @@ class driftsvm(object):
 		# coordinate descent
 		if sparse.issparse(Xy):
 			if d > n:
-				Q = Xy.dot(Xy.T)
+				Q = Xy.dot(Xy.T).toarray()
 			for ite in range(self.max_iter):
 				if diff < self.eps:
 					break
