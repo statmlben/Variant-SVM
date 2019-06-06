@@ -38,28 +38,47 @@ class driftsvm(object):
 		if sparse.issparse(Xy):
 			if d > n:
 				Q = Xy.dot(Xy.T)
-			for ite in range(self.max_iter):
-				if diff < self.eps:
-					break
-				beta_old = np.copy(self.beta)
-				for i in range(n):
-					if diag[i] != 0:
-						if d <= n:
-							delta_tmp = (1. - drift[i] - Xy[i].dot(self.beta)[0]) / diag[i]
-						else:
-							delta_tmp = (1. - drift[i] - Q[i].dot(self.alpha)[0]) / diag[i]
-						delta_tmp = max(-self.alpha[i], min(sample_weight[i] - self.alpha[i], delta_tmp))
-					if diag[i] == 0:
-						if Xy[i].dot(self.beta)[0] < 1 - drift[i]:
-							delta_tmp = sample_weight[i] - self.alpha[i]
-						else:
-							delta_tmp = -self.alpha[i]
-					self.alpha[i] = self.alpha[i] + delta_tmp
-					self.beta = np.array(self.beta + delta_tmp*Xy[i])[0]
-				diff = np.sum(np.abs(beta_old - self.beta))/np.sum(np.abs(beta_old+1e-10))
-				if self.print_step == 1:
-					if ite > 0:
-						print("ite %s coordinate descent with diff: %.3f;" %(ite, diff))
+				for ite in range(self.max_iter):
+					if diff < self.eps:
+						break
+					alpha_old = np.copy(self.alpha)
+					for i in range(n):
+						if diag[i] != 0:
+							Grad_tmp = Q[i].dot(self.alpha)[0]
+							delta_tmp = (1. - drift[i] - Grad_tmp) / diag[i]
+							delta_tmp = max(-self.alpha[i], min(sample_weight[i] - self.alpha[i], delta_tmp))
+						if diag[i] == 0:
+							if Grad_tmp < 1 - drift[i]:
+								delta_tmp = sample_weight[i] - self.alpha[i]
+							else:
+								delta_tmp = -self.alpha[i]
+						self.alpha[i] = self.alpha[i] + delta_tmp
+					diff = np.sum(np.abs(alpha_old - self.alpha))/np.sum(np.abs(alpha_old+1e-10))
+					if self.print_step == 1:
+						if ite > 0:
+							print("ite %s coordinate descent with diff: %.3f;" %(ite, diff))
+				self.beta = Xy.T.dot(self.alpha)
+			else:
+				for ite in range(self.max_iter):
+					if diff < self.eps:
+						break
+					beta_old = np.copy(self.beta)
+					for i in range(n):
+						if diag[i] != 0:
+							Grad_tmp = Xy[i].dot(self.beta)[0]
+							delta_tmp = (1. - drift[i] - Grad_tmp) / diag[i]
+							delta_tmp = max(-self.alpha[i], min(sample_weight[i] - self.alpha[i], delta_tmp))
+						if diag[i] == 0:
+							if Grad_tmp < 1 - drift[i]:
+								delta_tmp = sample_weight[i] - self.alpha[i]
+							else:
+								delta_tmp = -self.alpha[i]
+						self.alpha[i] = self.alpha[i] + delta_tmp
+						self.beta = np.array(self.beta + delta_tmp*Xy[i])[0]
+					diff = np.sum(np.abs(beta_old - self.beta))/np.sum(np.abs(beta_old+1e-10))
+					if self.print_step == 1:
+						if ite > 0:
+							print("ite %s coordinate descent with diff: %.3f;" %(ite, diff))
 		else:
 			alpha_C, beta_C = CD_drift(Xy, diag, drift, self.alpha, self.beta, sample_weight, self.max_iter, self.eps, self.print_step)
 			self.alpha, self.beta = np.array(alpha_C), np.array(beta_C)
