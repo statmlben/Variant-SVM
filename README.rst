@@ -23,6 +23,7 @@ User installation
 ~~~~~~~~~~~~~~~~~
 
 Install Variant-SVMs using ``pip`` ::
+
 	pip install VarSVM
 
 or::
