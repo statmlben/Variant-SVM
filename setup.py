@@ -11,7 +11,6 @@ ext_1 = Extension(SRC_DIR + ".fastloop",
 
 EXTENSIONS = [ext_1]
 
-
 if __name__ == "__main__":
     setup(
         # Needed to silence warnings (and to be a worthwhile package)
@@ -25,6 +24,7 @@ if __name__ == "__main__":
         install_requires=['numpy', 'scipy', 'Cython'],
         # *strongly* suggested for sharing
         version='0.2',
+        download_url = 'https://github.com/statmlben/Variant-SVM/archive/0.2.tar.gz',
         # The license can be anything you like
         license='MIT',
         description='A python package for variant SVMs',
