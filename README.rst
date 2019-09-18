@@ -25,9 +25,6 @@ User installation
 Install Variant-SVMs using ``pip`` ::
 
 	pip install VarSVM
-
-or::
-
 	pip install git+https://github.com/statmlben/Variant-SVM.git
 
 Source code
