@@ -1,5 +1,6 @@
 Variant-SVMs
 ============
+[![Downloads](https://pepy.tech/badge/varsvm)](https://pepy.tech/project/varsvm)
 
 VarSVM is a Python module for solving variants Support Vector Machines (SVM).
 
