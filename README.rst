@@ -1,12 +1,11 @@
 .. -*- mode: rst -*-
 
-|PyPi| |Python35| |Python36| |downloads| |downloads_month|
+|PyPi| |Python3| |downloads| |downloads_month|
 
 .. |PyPi| image:: https://badge.fury.io/py/VarSVM.svg
 .. _PyPi: https://badge.fury.io/py/VarSVM
 
-.. |Python35| image:: https://img.shields.io/badge/python-3.5-blue.svg
-.. |Python36| image:: https://img.shields.io/badge/python-3.6-blue.svg
+.. |Python3| image:: https://img.shields.io/badge/python-3-green.svg
 .. |downloads| image:: https://pepy.tech/badge/varsvm
 .. |downloads_month| image:: https://pepy.tech/badge/varsvm/month
 
