@@ -1,8 +1,17 @@
 Variant-SVMs
 ============
-+ [![Downloads](https://pepy.tech/badge/varsvm)](https://pepy.tech/project/varsvm)
-[![Build Status](https://travis-ci.com/username/projectname.svg?branch=master)](https://travis-ci.com/username/projectname)
+.. -*- mode: rst -*-
 
+|Codecov|_ |Python35|_ |PyPi|_
+
+.. |Codecov| image:: https://codecov.io/github/scikit-learn/scikit-learn/badge.svg?branch=master&service=github
+.. _Codecov: https://codecov.io/github/scikit-learn/scikit-learn?branch=master
+
+.. |Python35| image:: https://img.shields.io/badge/python-3.5-blue.svg
+.. _Python35: https://badge.fury.io/py/scikit-learn
+
+.. |PyPi| image:: https://badge.fury.io/py/scikit-learn.svg
+.. _PyPi: https://badge.fury.io/py/scikit-learn
 
 VarSVM is a Python module for solving variants Support Vector Machines (SVM).
 
