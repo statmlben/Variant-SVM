@@ -7,10 +7,7 @@ Variant-SVMs
 .. |PyPi| image:: https://badge.fury.io/py/VarSVM.svg
 .. _PyPi: https://badge.fury.io/py/VarSVM
 
-.. image:: https://pepy.tech/badge/varsvm
-
 .. |Downloads| image:: https://pepy.tech/badge/varsvm
-.. _Dowloads: https://pepy.tech/project/varsvm
 
 VarSVM is a Python module for solving variants Support Vector Machines (SVM).
 
