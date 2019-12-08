@@ -2,10 +2,10 @@ Variant-SVMs
 ============
 .. -*- mode: rst -*-
 
-|PyPi|_ |Downloads|_
+|PyPo|_ |Downloads|_
 
-.. |PyPi| image:: https://badge.fury.io/py/VarSVM.svg
-.. _PyPi: https://badge.fury.io/py/VarSVM
+.. |PyPo| image:: https://badge.fury.io/py/VarSVM.svg
+.. _PyPo: https://badge.fury.io/py/VarSVM
 
 .. |Downloads| image:: https://pepy.tech/badge/varsvm
 
