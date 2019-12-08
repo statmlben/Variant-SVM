@@ -7,6 +7,10 @@ Variant-SVMs
 .. |PyPi| image:: https://badge.fury.io/py/VarSVM.svg
 .. _PyPi: https://badge.fury.io/py/VarSVM
 
+.. image:: https://pepy.tech/badge/varsvm
+:target: https://pepy.tech/project/varsvm
+:alt: Downloads
+
 .. |Downloads| image:: https://pepy.tech/badge/varsvm
 .. _Dowloads: https://pepy.tech/project/varsvm
 
