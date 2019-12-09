@@ -1,6 +1,6 @@
 .. -*- mode: rst -*-
 
-|PyPi| |Python3| |downloads| |downloads_month|
+|PyPi|_ |Python3| |downloads| |downloads_month|
 
 .. |PyPi| image:: https://badge.fury.io/py/VarSVM.svg
 .. _PyPi: https://badge.fury.io/py/VarSVM
