@@ -1,13 +1,15 @@
 .. -*- mode: rst -*-
 
-|PyPi|_ |Python3| |downloads| |downloads_month|
+|PyPi|_ |Python3| |downloads|_ |downloads_month|_
 
 .. |PyPi| image:: https://badge.fury.io/py/VarSVM.svg
 .. _PyPi: https://badge.fury.io/py/VarSVM
 
 .. |Python3| image:: https://img.shields.io/badge/python-3-green.svg
 .. |downloads| image:: https://pepy.tech/badge/varsvm
+.. _downloads: https://pepy.tech/badge/varsvm
 .. |downloads_month| image:: https://pepy.tech/badge/varsvm/month
+.. _downloads_month: https://pepy.tech/badge/varsvm
 
 Variant-SVMs
 ============
