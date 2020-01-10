@@ -75,6 +75,8 @@ def CD(double[:,::1] Xy, double[::1] diag, double[::1] alpha, double[::1] beta, 
 		if print_step==1:
 			printf('ite %d: coordinate descent with diff: %10.3f. \n', ite, diff)
 		# printf('ite %d', ite,' coordinate descent with diff: %10.3f.', diff)
+	if ite == (max_iter-1):
+		print('The algo did not convergence, pls increase max_iter')
 	return alpha, beta
 
 
@@ -110,6 +112,8 @@ def CD_drift(double[:,::1] Xy, double[::1] diag, double[::1] drift, double[::1] 
 		if print_step==1:
 			printf('ite %d: coordinate descent with diff: %10.3f. \n', ite, diff)
 		# printf('ite %d', ite,' coordinate descent with diff: %10.3f.', diff)
+	if ite == (max_iter-1):
+		print('The algo did not convergence, pls increase max_iter')
 	return alpha, beta
 
 @cython.boundscheck(False)
@@ -146,7 +150,9 @@ def noneg_CD_drift(double[:,::1] Xy, double[::1] diag, double[::1] drift, double
 			beta[j] += delta_tmp
 		diff = l1_norm(run_vec_minus(beta, beta_old, d), d) / (l1_norm(beta_old, d) + 1e-10)
 		if print_step==1:
-			printf('ite %d: coordinate descent with diff: %10.3f. \n', ite, diff)
+			printf('ite %d: coordinate descent with diff: %10.5f. \n', ite, diff)
 		# printf('ite %d', ite,' coordinate descent with diff: %10.3f.', diff)
+	if ite == (max_iter-1):
+		print('The algo did not convergence, pls increase max_iter')
 	return alpha, beta, rho
 	
