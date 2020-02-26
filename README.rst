@@ -4,6 +4,7 @@
 
 .. |PyPi| image:: https://badge.fury.io/py/VarSVM.svg
 .. _PyPi: https://badge.fury.io/py/VarSVM
+.. |License| image:: https://img.shields.io/pypi/l/varsvm.svg 
 
 .. |Python3| image:: https://img.shields.io/badge/python-3-green.svg
 .. |downloads| image:: https://pepy.tech/badge/varsvm
