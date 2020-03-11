@@ -5,12 +5,12 @@ from VarSVM import CD
 class weightsvm(object):
 	## the function use coordinate descent to update the drift linear SVM
 	## C \sum_{i=1}^n w_i V(y_i(\beta^T x_i + drift_i)) + 1/2 \beta^T \beta
-	def __init__(self, C=1., print_step=1, eps=1e-4):
+	def __init__(self, C=1., max_iter=1000, print_step=1, eps=1e-4):
 		self.loss = 'hinge'
 		self.alpha = []
 		self.beta = []
 		self.C = C
-		self.max_iter = 1000
+		self.max_iter = max_iter
 		self.eps = eps
 		self.print_step = print_step
 
