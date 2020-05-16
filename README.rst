@@ -1,6 +1,6 @@
 .. -*- mode: rst -*-
 
-|PyPi|_ |License|_ |Python3| |downloads|_ |downloads_month|_
+|PyPi|_ |License|_ |Python3| |downloads|_ |downloads_month|_ |DOI|_
 
 .. |PyPi| image:: https://badge.fury.io/py/VarSVM.svg
 .. _PyPi: https://badge.fury.io/py/VarSVM
@@ -12,6 +12,8 @@
 .. _downloads: https://pepy.tech/project/varsvm
 .. |downloads_month| image:: https://pepy.tech/badge/varsvm/month
 .. _downloads_month: https://pepy.tech/project/varsvm
+.. |DOI| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.3830281.svg
+.. _DOI: https://doi.org/10.5281/zenodo.3830281
 
 Variant-SVMs
 ============
