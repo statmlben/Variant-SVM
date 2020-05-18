@@ -1,5 +1,5 @@
 from setuptools import setup, Extension
-from Cython.Distutils import build_ext
+# from Cython.Distutils import build_ext
 import numpy as np
 
 SRC_DIR = "VarSVM"
@@ -28,7 +28,7 @@ if __name__ == "__main__":
         # The license can be anything you like
         license='MIT',
         description='A python package for variant SVMs',
-        cmdclass={"build_ext": build_ext},
+        #cmdclass={"build_ext": build_ext},
         ext_modules=EXTENSIONS
         # We will also need a readme eventually (there will be a warning)
         # long_description=open('README.txt').read(),
