@@ -8,6 +8,8 @@ ext_1 = Extension(SRC_DIR + ".fastloop",
                   libraries=[],
                   include_dirs=[np.get_include()])
 
+with open('README.rst') as f:
+    LONG_DESCRIPTION = f.read()
 
 EXTENSIONS = [ext_1]
 
@@ -29,7 +31,7 @@ if __name__ == "__main__":
         license='MIT',
         description='A python package for variant SVMs',
         #cmdclass={"build_ext": build_ext},
-        ext_modules=EXTENSIONS
+        ext_modules=EXTENSIONS,
         # We will also need a readme eventually (there will be a warning)
-        # long_description=open('README.txt').read(),
+        long_description=LONG_DESCRIPTION
     )
