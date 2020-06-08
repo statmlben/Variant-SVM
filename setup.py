@@ -17,6 +17,7 @@ if __name__ == "__main__":
     setup(
         # Needed to silence warnings (and to be a worthwhile package)
         name='VarSVM',
+        description='Python library for Variants of Support Vector Machines',
         url='https://github.com/statmlben/Variant-SVM',
         author='Ben Dai',
         author_email='bdai@umn.edu',
@@ -26,10 +27,9 @@ if __name__ == "__main__":
         install_requires=['numpy', 'scipy', 'Cython'],
         # *strongly* suggested for sharing
         version='0.5',
-        download_url = 'https://github.com/statmlben/Variant-SVM/archive/0.2.tar.gz',
+        download_url = 'https://github.com/statmlben/Variant-SVM/archive/0.5.tar.gz',
         # The license can be anything you like
         license='MIT',
-        description='A python package for variant SVMs',
         #cmdclass={"build_ext": build_ext},
         ext_modules=EXTENSIONS,
         # We will also need a readme eventually (there will be a warning)

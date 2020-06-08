@@ -53,7 +53,7 @@ You can check the latest sources with the command::
 
 
 Documentation
-------------
+-------------
 
 The mathematical formulation for each model can be found in `VariantSVMs <./Variant-SVMs.pdf>`_.
 
@@ -79,7 +79,7 @@ Classical weighted SVMs.
 			- sample_weight : array-like, shape (n_samples,), weight for each sample.
 
 Drift SVM
-~~~~~~~~~~~~
+~~~~~~~~~
 SVM with dift or fixed intercept for each instance.
 
 - class VarSVM.driftsvm(alpha=[], beta=[], C=1., max_iter = 1000, eps = 1e-4, print_step = 1)
@@ -101,7 +101,7 @@ SVM with dift or fixed intercept for each instance.
 			- sample_weight : array-like, shape (n_samples,), weight for each instance.
 
 Non-negative Drift SVM
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 SVM with non-negative constrains for coefficients.
 
 - class VarSVM.noneg_driftsvm(alpha=[], beta=[], C=1., max_iter = 1000, eps = 1e-4, print_step = 1)
@@ -123,7 +123,7 @@ SVM with non-negative constrains for coefficients.
 			- sample_weight : array-like, shape (n_samples,), weight for each instance.
 
 Example
-~~~~~~~~~~~~~~~~~
+~~~~~~~
 
 .. code-block:: Python
 
