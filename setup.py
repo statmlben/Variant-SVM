@@ -25,7 +25,7 @@ if __name__ == "__main__":
         # Needed for dependencies
         install_requires=['numpy', 'scipy', 'Cython'],
         # *strongly* suggested for sharing
-        version='0.4',
+        version='0.5',
         download_url = 'https://github.com/statmlben/Variant-SVM/archive/0.2.tar.gz',
         # The license can be anything you like
         license='MIT',
