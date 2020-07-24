@@ -20,7 +20,7 @@ Variant-SVMs
 
 VarSVM is a Python module for solving variants Support Vector Machines (SVM).
 
-Website: https://variant-svm.readthedocs.io/en/latest/
+Website: https://variant-svm.readthedocs.io
 
 This project was created by `Ben Dai <http://users.stat.umn.edu/~bdai/>`_. If there is any problem and suggestion please contact me via <bdai@umn.edu>.
 
@@ -44,6 +44,9 @@ User installation
 Install Variant-SVMs using ``pip`` ::
 
 	pip install VarSVM
+
+or ::
+
 	pip install git+https://github.com/statmlben/Variant-SVM.git
 
 Source code
