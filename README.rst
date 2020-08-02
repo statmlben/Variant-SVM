@@ -30,40 +30,37 @@ Installation
 Dependencies
 ~~~~~~~~~~~~
 
-Variant-SVMs requires:
+Tab-Data requires:
 
 - Python
 - NumPy
-- SciPy
-- Cython 
-
+- Pandas
+- Sklearn
 
 User installation
 ~~~~~~~~~~~~~~~~~
 
 Install Variant-SVMs using ``pip`` ::
 
-	pip install VarSVM
+	pip install tab-data
 
 or ::
 
-	pip install git+https://github.com/statmlben/Variant-SVM.git
+	pip install git+https://github.com/statmlben/tab-data.git
 
 Source code
 ~~~~~~~~~~~
 
 You can check the latest sources with the command::
 
-    git clone https://github.com/statmlben/Variant-SVM.git
+    git clone https://github.com/statmlben/tab-data.git
 
 
 Documentation
 -------------
 
-The mathematical formulation for each model can be found in `VariantSVMs <./Variant-SVMs.pdf>`_.
-
-Weighted SVM
-~~~~~~~~~~~~
+weightsvm
+~~~~~~~~~
 Classical weighted SVMs.
 
 - class VarSVM.weightsvm(alpha=[], beta=[], C=1., max_iter = 1000, eps = 1e-4, print_step = 1)

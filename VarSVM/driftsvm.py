@@ -5,7 +5,8 @@ from VarSVM import CD_drift
 class driftsvm(object):
 	''' 
 	the function use coordinate descent to update the drift linear SVM
-	 \sum_{i=1}^n w_i V(y_i(\beta^T x_i + drift_i)) + 1/2 \beta^T \beta 
+	 \sum_{i=1}^n w_i V(y_i(\beta^T x_i + drift_i)) + 1/2 \beta^T \beta
+	
 	'''
 	def __init__(self, C=1., loss='hinge', max_iter=1000, max_iter_dca=1000, print_step=1, eps=1e-4):
 		self.loss = loss
