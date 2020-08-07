@@ -22,7 +22,7 @@ VarSVM is a Python module for solving variants Support Vector Machines (SVM).
 
 Website: https://variant-svm.readthedocs.io
 
-This project was created by `Ben Dai <http://users.stat.umn.edu/~bdai/>`_. If there is any problem and suggestion please contact me via <bdai@umn.edu>.
+This project was created by `Ben Dai <https://www.bendai.org/>`_. If there is any problem and suggestion please contact me via <bdai@umn.edu>.
 
 Installation
 ------------
