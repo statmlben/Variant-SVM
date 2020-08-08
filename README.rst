@@ -2,7 +2,7 @@
 
 |PyPi|_ |License|_ |Python3| |downloads|_ |downloads_month|_ |DOI|_
 
-.. |PyPi| image:: https://badge.fury.io/py/VarSVM.svg
+.. |PyPi| image:: https://badge.fury.io/py/varsvm.svg
 .. _PyPi: https://badge.fury.io/py/VarSVM
 .. |License| image:: https://img.shields.io/pypi/l/varsvm.svg
 .. _License: https://img.shields.io/pypi/l/varsvm.svg
