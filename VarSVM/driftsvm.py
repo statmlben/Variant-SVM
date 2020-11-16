@@ -1,14 +1,15 @@
 import numpy as np
 from scipy import sparse
+from sklearn.base import BaseEstimator, ClassifierMixin
+from sklearn.utils.validation import check_X_y, check_array
 from VarSVM import CD_drift
 
-class driftsvm(object):
+class driftsvm(BaseEstimator, ClassifierMixin):
 	''' 
 	the function use coordinate descent to update the drift linear SVM
 	 \sum_{i=1}^n w_i V(y_i(\beta^T x_i + drift_i)) + 1/2 \beta^T \beta
-	
 	'''
-	def __init__(self, C=1., loss='hinge', max_iter=1000, max_iter_dca=1000, print_step=1, eps=1e-4):
+	def __init__(self, C=1., max_iter=1000, max_iter_dca=1000, print_step=1, eps=1e-4, loss='hinge'):
 		self.loss = loss
 		self.alpha = []
 		self.beta = []
@@ -18,7 +19,16 @@ class driftsvm(object):
 		self.eps = eps
 		self.print_step = print_step
 
-	def fit(self, X, y, drift, sample_weight=1.):
+	def get_params(self, deep=True):
+		return {"C": self.C, "loss": self.loss, 'print_step': self.print_step}
+
+	def set_params(self, **parameters):
+		for parameter, value in parameters.items():
+			setattr(self, parameter, value)
+		return self
+
+	def fit(self, X, y, drift=0., sample_weight=1.):
+		X, y = check_X_y(X, y)
 		n, d = X.shape
 		self.alpha = np.zeros(n)
 		diff = 1.
@@ -174,3 +184,7 @@ class driftsvm(object):
 
 	def decision_function(self, X, drift):
 		return np.dot(X, self.beta) + drift
+
+	def predict(self, X):
+		X = check_array(X)
+		return np.sign(self.decision_function(X))

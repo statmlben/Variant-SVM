@@ -1,3 +1,5 @@
+import pyximport
+pyximport.install()
 from .fastloop import CD, CD_drift, noneg_CD_drift
 from VarSVM.weightsvm import weightsvm
 from VarSVM.driftsvm import driftsvm

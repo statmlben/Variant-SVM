@@ -1,12 +1,14 @@
 import numpy as np
 from scipy import sparse
+from sklearn.base import BaseEstimator, ClassifierMixin
+from sklearn.utils.validation import check_X_y, check_array
 from VarSVM import noneg_CD_drift
 
-class noneg_driftsvm(object):
+class noneg_driftsvm(BaseEstimator, ClassifierMixin):
 	## the function use coordinate descent to update the drift linear SVM
 	## C \sum_{i=1}^n w_i V(y_i(\beta^T x_i + drift_i)) + 1/2 \beta^T \beta
-	def __init__(self, C=1., max_iter=1000, print_step=1, eps=1e-4):
-		self.loss = 'hinge'
+	def __init__(self, C=1., max_iter=1000, print_step=1, eps=1e-4, loss='hinge'):
+		self.loss = loss
 		self.alpha = []
 		self.beta = []
 		self.rho = []
@@ -15,7 +17,16 @@ class noneg_driftsvm(object):
 		self.eps = eps
 		self.print_step = print_step
 
-	def fit(self, X, y, drift, sample_weight=1.):
+	def get_params(self, deep=True):
+		return {"C": self.C, "loss": self.loss, 'print_step': self.print_step}
+
+	def set_params(self, **parameters):
+		for parameter, value in parameters.items():
+			setattr(self, parameter, value)
+		return self
+
+	def fit(self, X, y, drift=0., sample_weight=1.):
+		X, y = check_X_y(X, y)
 		n, d = X.shape
 		self.alpha, self.rho = np.zeros(n), np.zeros(d)
 		diff = 1.
@@ -64,11 +75,16 @@ class noneg_driftsvm(object):
 		# 		if ite > 0:
 		# 			print("ite %s coordinate descent with diff: %.3f; obj: %.3f" %(ite, diff, obj))
 
-	def dual_obj(self, Xy, drift):
+	def dual_obj(self, Xy, drift=0.):
 		sum_tmp = np.dot(self.alpha, Xy)
 		obj = np.dot(1. - drift, self.alpha) - .5 * np.dot(sum_tmp, sum_tmp) \
 			- .5 * np.dot(self.rho, self.rho) - np.dot(sum_tmp, self.rho)
 		return obj
 
-	def decision_function(self, X, drift):
+	def decision_function(self, X, drift=0.):
 		return np.dot(X, self.beta) + drift
+
+	def predict(self, X, drift=0.):
+		X = check_array(X)
+		return np.sign(self.decision_function(X, drift))
+
