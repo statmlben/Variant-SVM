@@ -3,11 +3,7 @@
 |PyPi|_ |License|_ |Python3| |downloads|_ |downloads_month|_ |DOI|_
 
 .. |PyPi| image:: https://badge.fury.io/py/varsvm.svg
-<<<<<<< HEAD
 .. _PyPi: https://badge.fury.io/py/varsvm
-=======
-.. _PyPi: https://badge.fury.io/py/VarSVM
->>>>>>> a4490acdb97cf9eeb7ce171e57466f19357d1ab3
 .. |License| image:: https://img.shields.io/pypi/l/varsvm.svg
 .. _License: https://img.shields.io/pypi/l/varsvm.svg
 
