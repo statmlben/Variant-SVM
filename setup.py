@@ -16,7 +16,7 @@ EXTENSIONS = [ext_1]
 if __name__ == "__main__":
     setup(
         # Needed to silence warnings (and to be a worthwhile package)
-        name='VarSVM',
+        name='varsvm',
         description='Python library for Variants of Support Vector Machines',
         url='https://github.com/statmlben/Variant-SVM',
         author='Ben Dai',
@@ -26,7 +26,7 @@ if __name__ == "__main__":
         # Needed for dependencies
         install_requires=['numpy', 'scipy', 'Cython'],
         # *strongly* suggested for sharing
-        version='0.5',
+        version='0.6',
         download_url = 'https://github.com/statmlben/Variant-SVM/archive/0.5.tar.gz',
         # The license can be anything you like
         license='MIT',
