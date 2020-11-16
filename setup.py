@@ -26,8 +26,8 @@ if __name__ == "__main__":
         # Needed for dependencies
         install_requires=['numpy', 'scipy', 'Cython'],
         # *strongly* suggested for sharing
-        version='0.6',
-        download_url = 'https://github.com/statmlben/Variant-SVM/archive/0.5.tar.gz',
+        version='1.0',
+        download_url = 'https://github.com/statmlben/Variant-SVM/archive/1.0.tar.gz',
         # The license can be anything you like
         license='MIT',
         #cmdclass={"build_ext": build_ext},
