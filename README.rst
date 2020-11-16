@@ -46,18 +46,18 @@ User installation
 
 Install Variant-SVMs using ``pip`` ::
 
-	pip install tab-data
+	pip install varsvm
 
 or ::
 
-	pip install git+https://github.com/statmlben/tab-data.git
+	pip install git+https://github.com/statmlben/varsvm.git
 
 Source code
 ~~~~~~~~~~~
 
 You can check the latest sources with the command::
 
-    git clone https://github.com/statmlben/tab-data.git
+    git clone https://github.com/statmlben/varsvm.git
 
 
 Documentation
