@@ -34,7 +34,7 @@ Installation
 Dependencies
 ~~~~~~~~~~~~
 
-Tab-Data requires:
+varsvm requires:
 
 - Python
 - NumPy
@@ -51,6 +51,10 @@ Install Variant-SVMs using ``pip`` ::
 or ::
 
 	pip install git+https://github.com/statmlben/varsvm.git
+
+Please install ``python3-dev`` before install ``varsvm`` ::
+
+        sudo apt-get install python3-dev
 
 Source code
 ~~~~~~~~~~~

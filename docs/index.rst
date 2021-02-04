@@ -2,8 +2,8 @@
 
 |PyPi|_ |License|_ |Python3| |downloads|_ |downloads_month|_ |DOI|_
 
-.. |PyPi| image:: https://badge.fury.io/py/VarSVM.svg
-.. _PyPi: https://badge.fury.io/py/VarSVM
+.. |PyPi| image:: https://badge.fury.io/py/varsvm.svg
+.. _PyPi: https://badge.fury.io/py/varsvm
 .. |License| image:: https://img.shields.io/pypi/l/varsvm.svg
 .. _License: https://img.shields.io/pypi/l/varsvm.svg
 
@@ -20,7 +20,7 @@ Variant-SVMs
 
 VarSVM is a Python module for solving variants Support Vector Machines (SVM).
 
-This project was created by `Ben Dai <http://users.stat.umn.edu/~bdai/>`_. If there is any problem and suggestion please contact me via <bdai@umn.edu>.
+This project was created by `Ben Dai <https://www.bendai.org/>`_. If there is any problem and suggestion please contact me via <bdai@umn.edu>.
 
 Installation
 ------------
@@ -33,7 +33,7 @@ Variant-SVMs requires:
 - Python
 - NumPy
 - SciPy
-- Cython 
+- Cython
 
 
 User installation
@@ -140,4 +140,3 @@ Example
    clf = noneg_driftsvm()
    clf.fit(X=X, y=y, drift=drift)
    y_pred = clf.decision_function(X=X, drift=drift)
-
