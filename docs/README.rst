@@ -137,17 +137,24 @@ Example
 
 .. code-block:: Python
 
-   import numpy as np
-   from sklearn.datasets import make_classification
-   from VarSVM import noneg_driftsvm
+    import numpy as np
+    from sklearn.datasets import make_classification
+    from VarSVM import noneg_driftsvm
+    from sklearn.model_selection import GridSearchCV
 
-   X, y = make_classification(n_features=4, random_state=0)
-   y = y * 2 - 1
+    X, y = make_classification(n_features=4, random_state=0)
+    y = y * 2 - 1
 
-   n = len(X)
-   drift = .28*np.ones(n)
+    # fit a single model
+    n = len(X)
+    drift = .28*np.ones(n)
 
-   clf = noneg_driftsvm()
-   clf.fit(X=X, y=y, drift=drift)
-   y_pred = clf.decision_function(X=X, drift=drift)
+    clf = noneg_driftsvm()
+    clf.fit(X=X, y=y, drift=drift)
+    y_pred = clf.decision_function(X=X, drift=drift)
 
+    # Tuning hyperparams based on sklearn.model_selection.GridSearchCV
+    parameters = {'C':[1, 10]}
+    psvm = noneg_driftsvm()
+    clf = GridSearchCV(psvm, parameters)
+    clf.fit(iris.data, iris.target)
