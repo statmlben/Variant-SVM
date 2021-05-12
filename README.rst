@@ -139,7 +139,7 @@ Example
 
     import numpy as np
     from sklearn.datasets import make_classification
-    from VarSVM import noneg_driftsvm
+    from varsvm import noneg_driftsvm
     from sklearn.model_selection import GridSearchCV
 
     X, y = make_classification(n_features=4, random_state=0)
