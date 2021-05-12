@@ -18,15 +18,32 @@
 Variant-SVMs
 ============
 
-VarSVM is a Python module for solving variants Support Vector Machines (SVM).
-
-This project was created by `Ben Dai <https://www.bendai.org/>`_. If there is any question and suggestion please contact me via <bdai@umn.edu>.
-
 .. image:: ./logo/logo_header.png
    :align: center
    :width: 800
+
+VarSVM is a Python module for solving variants Support Vector Machines (SVM), including weighted SVM, drifted SVM, and nonnegative SVM.
+
+This project was created by `Ben Dai <https://www.bendai.org/>`_. If there is any question and suggestion please contact me via <bdai@umn.edu>.
 
 .. toctree::
     :maxdepth: 2
     
     README
+
+
+Reference manual
+================
+
+.. toctree::
+   :maxdepth: 2
+
+   python-api/varsvm
+
+
+.. Indices and tables
+.. ==================
+
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`

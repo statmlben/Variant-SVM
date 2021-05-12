@@ -4,18 +4,18 @@ VarSVM package
 Submodules
 ----------
 
-VarSVM\.driftsvm module
------------------------
+VarSVM\.weightsvm module
+------------------------
 
-.. automodule:: VarSVM.driftsvm
+.. automodule:: VarSVM.weightsvm
     :members:
     :undoc-members:
     :show-inheritance:
 
-VarSVM\.fastloop module
+VarSVM\.driftsvm module
 -----------------------
 
-.. automodule:: VarSVM.fastloop
+.. automodule:: VarSVM.driftsvm
     :members:
     :undoc-members:
     :show-inheritance:
@@ -27,23 +27,6 @@ VarSVM\.noneg\_driftsvm module
     :members:
     :undoc-members:
     :show-inheritance:
-
-VarSVM\.setup module
---------------------
-
-.. automodule:: VarSVM.setup
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-VarSVM\.weightsvm module
-------------------------
-
-.. automodule:: VarSVM.weightsvm
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 
 Module contents
 ---------------
