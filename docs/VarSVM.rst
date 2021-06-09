@@ -30,7 +30,7 @@ VarSVM\.noneg\_driftsvm module
 
 Module contents
 ---------------
-
+ 
 .. automodule:: VarSVM
     :members:
     :undoc-members:
