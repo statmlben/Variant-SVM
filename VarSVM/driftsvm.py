@@ -1,3 +1,9 @@
+"""
+Linear SVM with fixed sample-adaptive intercepts
+"""
+
+# Author: Ben Dai <bdai@umn.edu>
+
 import numpy as np
 from scipy import sparse
 from sklearn.base import BaseEstimator, ClassifierMixin

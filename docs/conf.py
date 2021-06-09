@@ -32,7 +32,7 @@ sys.path.insert(0, os.path.abspath('../'))
 # ones.
 # extensions = ['sphinx.ext.autodoc', 'sphinx.ext.mathjax', 'sphinx.ext.napoleon', 'nbsphinx',
 #                 'nbsphinx_link', 'recommonmark', 'sphinx_git']
-
+ 
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
