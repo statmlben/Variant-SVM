@@ -22,12 +22,12 @@ if __name__ == "__main__":
         author='Ben Dai',
         author_email='bdai@umn.edu',
         # Needed to actually package something
-        packages=['VarSVM'],
+        packages=['varsvm'],
         # Needed for dependencies
         install_requires=['numpy', 'scipy', 'Cython'],
         # *strongly* suggested for sharing
-        version='1.1',
-        download_url = 'https://github.com/statmlben/Variant-SVM/archive/1.0.tar.gz',
+        version='1.3',
+        download_url = 'https://github.com/statmlben/Variant-SVM/archive/1.3.tar.gz',
         # The license can be anything you like
         license='MIT',
         #cmdclass={"build_ext": build_ext},

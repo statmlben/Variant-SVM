@@ -2,7 +2,7 @@ from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.utils.validation import check_X_y, check_array
 import numpy as np
 from scipy import sparse
-from VarSVM import CD
+from varsvm import CD
 
 class weightsvm(BaseEstimator, ClassifierMixin):
 	## the function use coordinate descent to update the drift linear SVM

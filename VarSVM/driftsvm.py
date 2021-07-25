@@ -8,7 +8,7 @@ import numpy as np
 from scipy import sparse
 from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.utils.validation import check_X_y, check_array
-from VarSVM import CD_drift
+from varsvm import CD_drift
 from sklearn import preprocessing
 
 class driftsvm(BaseEstimator, ClassifierMixin):
@@ -65,7 +65,7 @@ class driftsvm(BaseEstimator, ClassifierMixin):
 	>>> X, y = make_classification(n_features=4, random_state=0)
 	>>> y = y * 2 - 1
 	>>> drift = np.random.randn(len(X))
-	>>> clf = noneg_driftsvm()
+	>>> clf = driftsvm()
 	>>> clf.fit(X=X, y=y, drift=drift)
 	>>> y_pred = clf.decision_function(X=X, drift=drift)
     """
@@ -158,7 +158,7 @@ class driftsvm(BaseEstimator, ClassifierMixin):
 				self.coef_ = Xy.T.dot(self.dual_coef_)
 			else:
 				for ite in range(self.max_iter):
-					if diff < self.eps:
+					if diff < self.tol:
 						break
 					beta_old = np.copy(self.coef_)
 					for i in range(n):
@@ -178,13 +178,13 @@ class driftsvm(BaseEstimator, ClassifierMixin):
 						if ite > 0:
 							print("ite %s coordinate descent with diff: %.3f;" %(ite, diff))
 		else:
-			alpha_C, beta_C = CD_drift(Xy, diag, drift, self.dual_coef_, self.coef_, sample_weight, self.max_iter, self.eps, self.verbose)
+			alpha_C, beta_C = CD_drift(Xy, diag, drift, self.dual_coef_, self.coef_, sample_weight, self.max_iter, self.tol, self.verbose)
 			self.dual_coef_, self.coef_ = np.array(alpha_C), np.array(beta_C)
 		
 		if self.loss == 't-hinge':
 			diff_dca = 1. 
 			for ite_dca in range(self.max_iter_dca):
-				if diff_dca < self.eps:
+				if diff_dca < self.tol:
 					break
 				beta_old = np.copy(self.coef_)
 				G = 1.*( (Xy.dot(self.coef_) + drift) < 0)
@@ -193,7 +193,7 @@ class driftsvm(BaseEstimator, ClassifierMixin):
 					if d > n:
 						Q = Xy.dot(Xy.T)
 						for ite in range(self.max_iter):
-							if diff < self.eps:
+							if diff < self.tol:
 								break
 							alpha_old = np.copy(self.dual_coef_)
 							for i in range(n):
@@ -214,7 +214,7 @@ class driftsvm(BaseEstimator, ClassifierMixin):
 						self.coef_ = Xy.T.dot(self.dual_coef_ - G)
 					else:
 						for ite in range(self.max_iter):
-							if diff < self.eps:
+							if diff < self.tol:
 								break
 							beta_old = np.copy(self.coef_)
 							for i in range(n):
@@ -234,7 +234,7 @@ class driftsvm(BaseEstimator, ClassifierMixin):
 								if ite > 0:
 									print("ite %s coordinate descent with diff: %.3f;" %(ite, diff))
 				else:
-					alpha_C, beta_C = CD_drift(Xy, diag, drift, self.dual_coef_, self.coef_, sample_weight, self.max_iter, self.eps, self.verbose)
+					alpha_C, beta_C = CD_drift(Xy, diag, drift, self.dual_coef_, self.coef_, sample_weight, self.max_iter, self.tol, self.verbose)
 					self.dual_coef_, self.coef_ = np.array(alpha_C), np.array(beta_C)
 				diff_dca = np.sum(np.abs(self.coef_ - beta_old)) / (np.sum(np.abs(beta_old))+1e-10)
 				obj_t_hinge = np.sum(np.minimum(np.maximum(1 - self.decision_function(X,drift)*y, 0),1)) + .5*self.coef_.dot(self.coef_)
@@ -242,7 +242,7 @@ class driftsvm(BaseEstimator, ClassifierMixin):
 					print("DCA fits t-hinge-loss with diff: %.3f; primal obj: %.3f" %(diff_dca, obj_t_hinge))
 
 		# for ite in range(self.max_iter):
-		# 	if diff < self.eps:
+		# 	if diff < self.tol:
 		# 		break
 		# 	beta_old = np.copy(self.coef_)
 		# 	for i in range(n):
