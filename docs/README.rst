@@ -18,10 +18,6 @@
 Variant-SVMs
 ============
 
-.. image:: ./logo/logo_header.png
-   :align: center
-   :width: 100
-
 VarSVM is a Python scikit-learn estimators module for solving variants Support Vector Machines (SVM).
 
 Website: https://variant-svm.readthedocs.io
