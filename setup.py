@@ -2,7 +2,7 @@ from setuptools import setup, Extension
 # from Cython.Distutils import build_ext
 import numpy as np
 
-SRC_DIR = "VarSVM"
+SRC_DIR = "varsvm"
 ext_1 = Extension(SRC_DIR + ".fastloop",
                   [SRC_DIR + "/fastloop.pyx"],
                   libraries=[],
