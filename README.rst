@@ -1,9 +1,9 @@
 .. -*- mode: rst -*-
 
-|_dAI|_ |PyPi|_ |License|_ |Python3| |downloads|_ |downloads_month|_ |DOI|_
+|dAI|_ |PyPi|_ |License|_ |Python3| |downloads|_ |downloads_month|_ |DOI|_
 
-.. _dAI: <a href="https://bendai.org"><img src="https://img.shields.io/badge/Powered%20by-cuhk%40dAI-purple.svg"/></a>
-
+.. |dAI|: <a href="https://bendai.org"><img src="https://img.shields.io/badge/Powered%20by-cuhk%40dAI-purple.svg"/></a>
+.. _dAI: https://www.bendai.org
 .. |PyPi| image:: https://badge.fury.io/py/varsvm.svg
 .. _PyPi: https://badge.fury.io/py/varsvm
 .. |License| image:: https://img.shields.io/pypi/l/varsvm.svg
