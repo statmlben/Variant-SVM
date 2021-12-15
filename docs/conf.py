@@ -16,10 +16,12 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
-import sys
-sys.path.insert(0, os.path.abspath('..'))
+import sys, os
+sys.path.append('.')
+sys.path.append('..')
+sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../..'))
 
 # -- General configuration ------------------------------------------------
 
@@ -33,21 +35,24 @@ sys.path.insert(0, os.path.abspath('../'))
 # extensions = ['sphinx.ext.autodoc', 'sphinx.ext.mathjax', 'sphinx.ext.napoleon', 'nbsphinx',
 #                 'nbsphinx_link', 'recommonmark', 'sphinx_git']
  
+master_doc = 'index'
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.intersphinx'
-]
+    # "sphinx.ext.linkcode",
+    # "sphinx.ext.intersphinx",
+    "sphinx_autodoc_typehints",
+    'sphinx.ext.autosummary',
+    'numpydoc',
+    'nbsphinx'
+    ]
 
+autosummary_generate = True
+numpydoc_show_class_members = False
+nbsphinx_execute = 'never'
+nbsphinx_allow_errors = True
+# autodoc_mock_imports = ['numpy']
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
-
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
@@ -99,9 +104,10 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
-master_doc = 'index'
-html_logo = "./logo/logo.png"
+import sphinx_theme_pd
+html_theme = 'sphinx_theme_pd'
+html_theme_path = [sphinx_theme_pd.get_html_theme_path()]
+
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
@@ -111,7 +117,7 @@ html_logo = "./logo/logo.png"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.

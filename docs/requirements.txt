@@ -1,0 +1,8 @@
+Sphinx==4.3.1
+sphinx_rtd_theme
+hachibee_sphinx_theme
+numpydoc
+nbsphinx
+ipython
+sphinx_theme_pd
+sphinx_autodoc_typehints
